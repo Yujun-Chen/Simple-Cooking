@@ -10,6 +10,8 @@ A mobile-first recipe sharing web app. Browse recipes without an account, and si
 
 - **Browse freely.** Anyone can read recipes; an account is only needed to add them, and only a recipe's author can edit or delete it.
 - **Filters.** Narrow the list by skill level, cuisine and total time (30 min or less, 30 min to 1 hr, over 1 hr). Filters live in the URL, so they survive refreshes and can be shared.
+- **Favourites.** Tap the heart on any recipe to save it, then switch on the Favourites filter to see just those. Favourites are private to each account.
+- **Friendly cold starts.** The free-tier servers sleep when idle; the app tells visitors it's waking up instead of looking stuck, retries automatically, and keeps a copy of itself in the browser so return visits open quickly.
 - **Recipe pages built for cooking.** Swipe between Overview, Ingredients and Cooking pages, tick off ingredients as you go, and keep the screen awake while you cook.
 - **Photos with cropping.** Upload a photo and frame it in a 4:3 crop before saving. Photos are resized in the browser first, which also strips metadata such as GPS location. Recipes without a photo get a patterned placeholder.
 - **Author aliases.** Recipes show a public alias chosen on the account page, never an email address.
