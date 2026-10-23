@@ -11,6 +11,8 @@ A mobile-first recipe sharing web app. Browse recipes without an account, and si
 - **Browse freely.** Anyone can read recipes; an account is only needed to add them, and only a recipe's author can edit or delete it.
 - **Filters.** Narrow the list by skill level, cuisine and total time (30 min or less, 30 min to 1 hr, over 1 hr). Filters live in the URL, so they survive refreshes and can be shared.
 - **Favourites.** Tap the heart on any recipe to save it, then switch on the Favourites filter to see just those. Favourites are private to each account.
+- **Who can see it.** Each recipe is shared with everyone, with friends only, or kept private. The API enforces this everywhere, and a recipe you can't see behaves as if it doesn't exist.
+- **Friends.** Add friends by their alias; a connection needs both sides to agree. The Friends filter shows recipes from your friends, and a notification bell in the header lists new friend requests (accept or decline right there) and requests that were accepted.
 - **Friendly cold starts.** The free-tier servers sleep when idle; the app tells visitors it's waking up instead of looking stuck, retries automatically, and keeps a copy of itself in the browser so return visits open quickly.
 - **Recipe pages built for cooking.** Swipe between Overview, Ingredients and Cooking pages, tick off ingredients as you go, and keep the screen awake while you cook.
 - **Photos with cropping.** Upload a photo and frame it in a 4:3 crop before saving. Photos are resized in the browser first, which also strips metadata such as GPS location. Recipes without a photo get a patterned placeholder.
@@ -52,6 +54,6 @@ The website and API are separate apps, so they're deployed and versioned indepen
 
 - **No stored secrets.** The API reaches the database and photo storage with its Azure managed identity. The database accepts only Microsoft Entra sign-ins, and storage has key-based access turned off.
 - **Passkeys are bound to the site**, so they can't be phished, and the server keeps only their public keys. Passwords are stored as salted hashes.
-- **Ownership is enforced by the API**, not just the interface: only a recipe's author can change or delete it or its photo.
+- **Ownership and visibility are enforced by the API**, not just the interface: only a recipe's author can change or delete it or its photo, and friends-only and private recipes never leave the server for anyone else.
 - **Uploads are checked server-side**: real JPEG, PNG or WebP content only, at most 5 MB.
 - **Sign-in and uploads are rate-limited**, and all traffic is HTTPS only.
