@@ -11,6 +11,7 @@ A mobile-first recipe sharing web app. Browse recipes without an account, and si
 - **Browse freely.** Anyone can read recipes; an account is only needed to add them, and only a recipe's author can edit or delete it.
 - **Filters.** Narrow the list by skill level, cuisine and total time (30 min or less, 30 min to 1 hr, over 1 hr). Filters live in the URL, so they survive refreshes and can be shared.
 - **Favourites.** Tap the heart on any recipe to save it, then switch on the Favourites filter to see just those. Favourites are private to each account.
+- **Ratings and comments.** Rate any recipe you didn't write from one to five stars; the average shows on its card. Each recipe has a Comments page for tips, tweaks and how it turned out, showing each commenter's own rating. Authors can remove any comment on their recipes.
 - **Who can see it.** Each recipe is shared with everyone, with friends only, or kept private. The API enforces this everywhere, and a recipe you can't see behaves as if it doesn't exist.
 - **Friends.** Add friends by their alias; a connection needs both sides to agree. The Friends filter shows recipes from your friends, and a notification bell in the header lists new friend requests (accept or decline right there) and requests that were accepted.
 - **Friendly cold starts.** The free-tier servers sleep when idle; the app tells visitors it's waking up instead of looking stuck, retries automatically, and keeps a copy of itself in the browser so return visits open quickly.
@@ -54,6 +55,10 @@ The website and API are separate apps, so they're deployed and versioned indepen
 
 - **No stored secrets.** The API reaches the database and photo storage with its Azure managed identity. The database accepts only Microsoft Entra sign-ins, and storage has key-based access turned off.
 - **Passkeys are bound to the site**, so they can't be phished, and the server keeps only their public keys. Passwords are stored as salted hashes.
+- **Quick sign-up, safe recovery.** Creating an account takes one step. Forgotten passwords are reset with an emailed link, and the site answers a reset request, or a failed sign-in, the same way whether or not the address has an account.
+- **Signing out really ends the session.** The server stops that device's tokens working straight away, and each refresh token works only once.
+- **Signing keys are kept in Key Vault.** The keys that sign every session are stored encrypted by an Azure Key Vault key that the API can use but never read.
+- **Photos follow the recipe's visibility.** Photo storage is private; the API hands out read-only links that expire within two hours, and only for recipes the viewer may see.
 - **Ownership and visibility are enforced by the API**, not just the interface: only a recipe's author can change or delete it or its photo, and friends-only and private recipes never leave the server for anyone else.
 - **Uploads are checked server-side**: real JPEG, PNG or WebP content only, at most 5 MB.
 - **Sign-in and uploads are rate-limited**, and all traffic is HTTPS only.
